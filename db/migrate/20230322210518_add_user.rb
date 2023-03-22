@@ -4,7 +4,7 @@ class AddUser < ActiveRecord::Migration[6.1]
       table.string :first_name
       table.string :last_name
       table.string :email
-      table.string :password
+      table.string :password_digest
       table.timestamps null: false
     end
   end
