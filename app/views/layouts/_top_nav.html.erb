@@ -46,6 +46,15 @@
         </li> %>
       </ul>
       <ul class="navbar-nav">
+        <% if current_user %>
+          <li class="nav-item"> <%= link_to "Logout", '/logout', class: "nav-link" %></li>
+        <% else %>
+          <li class="nav-item">  <%= link_to 'Login', '/login', class: "nav-link" %> </li> 
+          <li class="nav-item"> <%= link_to 'Signup', '/signup', class: "nav-link" %></li>
+        <% end %>
+        <% yield %>
+      </ul>
+      <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-danger"
