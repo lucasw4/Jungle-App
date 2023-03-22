@@ -1,2 +1,0 @@
-module Controllers::AboutHelper
-end
