@@ -21,6 +21,11 @@ Rails.application.routes.draw do
     resources :products, except: [:edit, :update, :show]
   end
 
+  get "/login" => "sessions#new"
+  get "/logout" => "sessions#destroy"
+
+  post "/login" => "sessions#create"
+
   get "/signup" => "users#new"
   post "/users" => "users#create"
 
