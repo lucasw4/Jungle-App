@@ -37,6 +37,7 @@
             <li class="nav-item">
               <%= link_to 'About us', about_index_path, class: "nav-link" %> 
             </li>
+            <li> <%= link_to 'Signup', '/signup' %></li>
             <% Category.all.each do |category| %>
             <li class="nav-item">
               <%= link_to category.name, category, class: "nav-link" %>
