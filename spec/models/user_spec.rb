@@ -50,4 +50,37 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to_not be_empty
     end
   end
+
+  describe ".authenticate_with_credentials" do
+    it "should login with correct credentials" do
+      @user = User.create(first_name: "John", last_name: "Smith", email: "john@example.com", password: "password", password_confirmation: "password")
+      @user_login = User.authenticate_with_credentials("john@example.com", "password")
+      expect(@user_login).to eq(@user)
+    end
+
+    it "gives an error when logging in with incorrect email" do
+      @user = User.create(first_name: "John", last_name: "Smith", email: "john@example.com", password: "password", password_confirmation: "password")
+      @user_login = User.authenticate_with_credentials("john1231@example.com", "password")
+      expect(@user_login).to_not eq(@user)
+    end
+
+    it "gives an error when logging in with incorrect password" do
+      @user = User.create(first_name: "John", last_name: "Smith", email: "john@example.com", password: "password", password_confirmation: "password")
+      @user_login = User.authenticate_with_credentials("john@example.com", "password1231")
+      expect(@user_login).to_not eq(@user)
+    end
+
+    it "should login with spaces in email" do
+      @user = User.create(first_name: "John", last_name: "Smith", email: "john@example.com", password: "password", password_confirmation: "password")
+      @user_login = User.authenticate_with_credentials("john@example.com  ", "password")
+      expect(@user_login).to eq(@user)
+    end
+
+    it "should login with different capitalization of email" do
+      @user = User.create(first_name: "John", last_name: "Smith", email: "john@example.com", password: "password", password_confirmation: "password")
+      @user_login = User.authenticate_with_credentials("joHn@examPle.com", "password")
+      expect(@user_login).to eq(@user)
+    end
+
+  end
 end
